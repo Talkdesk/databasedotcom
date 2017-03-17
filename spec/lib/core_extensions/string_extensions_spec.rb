@@ -12,10 +12,8 @@ describe "string extensions" do
 
   describe "#constantize" do
     context "when string is empty" do
-      it "raises a NameError" do
-        expect {
-          "".constantize
-        }.to raise_error(NameError)
+      it "returns Object" do
+        "".constantize.should eq(Object)
       end
     end
 
