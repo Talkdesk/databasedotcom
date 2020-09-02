@@ -183,10 +183,10 @@ describe Databasedotcom::Client do
         @client.authenticate(:username => "username", :password => "password")
       end
 
-      it "defaults to version 22.0" do
+      it "defaults to version 49.0" do
         @client.version = nil
         @client.authenticate(:username => "username", :password => "password")
-        @client.version.should == "22.0"
+        @client.version.should == "49.0"
       end
 
     end
