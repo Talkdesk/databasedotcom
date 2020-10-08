@@ -8,11 +8,12 @@ module Databasedotcom
       matches = data.scan(/(\\u[0-9|a-f|A-F]{4})+/)
 
       matches.each do |match|
-        next unless match.length % 12 != 0
+        next if (match.length % 12).zero?
 
         fixed_match = match[0...-6]
-        data.gsub!(match, fixed_match)
+        data.gsub!(match + '"', fixed_match + '"')
       end
+
       JSON.parse(data)
     end
   end
