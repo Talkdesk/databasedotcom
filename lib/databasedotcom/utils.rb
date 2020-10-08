@@ -5,7 +5,7 @@ module Databasedotcom
     rescue JSON::ParserError => e
       raise e unless e.message.include? 'incomplete surrogate pair'
 
-      matches = data.scan(/(\\u[0-9|a-f|A-F]{4})+/)
+      matches = data.scan(/(\\u[0-9|a-f|A-F]{4})+/).flatten
 
       matches.each do |match|
         next if (match.length % 12).zero?
