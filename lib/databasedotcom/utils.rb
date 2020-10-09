@@ -11,7 +11,7 @@ module Databasedotcom
 
       matches.each do |match|
         puts match
-        next if (match.length - 1 % 12).zero?
+        next if ((match.length - 1) % 12).zero?
 
         puts "Will remove invalid unicode"
         fixed_match = match[0...-7]
