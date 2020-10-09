@@ -5,13 +5,18 @@ module Databasedotcom
     rescue JSON::ParserError => e
       raise e unless e.message.include? 'incomplete surrogate pair'
 
-      matches = data.scan(/(\\u[0-9|a-f|A-F]{4})+/).flatten
+      matches = data.scan(/(\\u[0-9|a-f|A-F]{4})+"/).flatten
+
+      puts matches
 
       matches.each do |match|
-        next if (match.length % 12).zero?
+        puts match
+        next if (match.length - 1 % 12).zero?
 
-        fixed_match = match[0...-6]
-        data.gsub!(match + '"', fixed_match + '"')
+        puts "Will remove invalid unicode"
+        fixed_match = match[0...-7]
+        puts fixed_match
+        data.sub!(match, fixed_match + '"')
       end
 
       JSON.parse(data)
